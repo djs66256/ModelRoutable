@@ -1,0 +1,39 @@
+enum NMVideoType {
+  NMVideoTypeA: 1
+  NMVideoTypeB: 2
+}
+model Video {
+    mvId: String
+    type: NMVideoType
+}
+routable VideoDetail {
+  class: NMVideoDetailViewController
+  path: /nm/video/detail
+  in: {
+    mvId: String!
+    type: NMVideoType
+  }
+  out: {
+    canceled: bool
+  }
+}
+routable UserDetail {
+  class: NMUserDetailViewController
+  path: /nm/user/detail
+  in: {
+    mvId: String!
+  }
+  out: {
+    canceled: bool
+  }
+}
+
+//
+//
+
+
+[router openVideoDetailWithParams:^(id<NMVideoDetailViewControllerInParamsBuilder> builder) {
+  builder.mvId(@"").type(NMVideoTypeB)
+} finish:^(id<NMVideoDetailViewControllerOutParams> result, NSError *error) {
+
+}];
